@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { compactEssaySourceLine, type EssaySummary } from "../../src/lib/essay-summaries";
+import { buildEssaySummaries, compactEssaySourceLine, type EssaySummary } from "../../src/lib/essay-summaries";
 import { isLanguageRichnessSource, modelDisplayName, sourceDisplayLabel } from "../../src/lib/labels";
+import type { SourceEssayData } from "../../src/lib/content-types";
 
 describe("source role labels", () => {
   it("uses the collection name for a published language textbook", () => {
@@ -35,5 +36,21 @@ describe("source role labels", () => {
   it("uses the official DeepSeek capitalization in model labels", () => {
     expect(modelDisplayName("deepseek-v4-flash")).toBe("DeepSeek-v4-flash");
     expect(modelDisplayName("DeepSeek-chat")).toBe("DeepSeek-chat");
+  });
+
+  it("does not expose imported guided-writing prompts as reading essays", () => {
+    const source = {
+      id: "prompt-1",
+      title: "Imported prompt",
+      ielts_prompt: "Discuss both views.",
+      content_role: "guided_writing_prompt",
+      topics: ["education"],
+      publication_ref: null,
+      answer_origin: "learner_imported_prompt",
+      author: "learner",
+      source_name: "Imported Task 2 prompt",
+    } as SourceEssayData;
+
+    expect(buildEssaySummaries([source], [], () => "导入题目")).toEqual([]);
   });
 });

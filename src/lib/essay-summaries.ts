@@ -37,6 +37,7 @@ export function buildEssaySummaries(
   }
 
   return sources
+    .filter((source) => source.content_role !== "guided_writing_prompt")
     .map((source): EssaySummary => ({
       id: source.id,
       title: source.title,
@@ -46,7 +47,9 @@ export function buildEssaySummaries(
       sourceLabel: sourceLabel(source.answer_origin, source.author, source.source_name),
       sentenceCount: sentenceCounts.get(source.id) ?? 0,
       essayNumber: collectionEssayNumber(source.publication_ref),
-      contentRole: source.content_role ?? "ielts_model_essay",
+      contentRole: source.content_role === "language_richness_corpus"
+        ? "language_richness_corpus"
+        : "ielts_model_essay",
     }))
     .sort((left, right) => (
       (left.essayNumber ?? Number.MAX_SAFE_INTEGER) - (right.essayNumber ?? Number.MAX_SAFE_INTEGER)
