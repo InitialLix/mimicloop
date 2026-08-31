@@ -1,0 +1,42 @@
+[
+  {
+    "file": "valid-source-essay.json",
+    "schema": "source",
+    "expected_valid": true
+  },
+  {
+    "file": "valid-language-richness-source.json",
+    "schema": "source",
+    "expected_valid": true
+  },
+  {
+    "file": "valid-candidate-card.json",
+    "schema": "candidate",
+    "expected_valid": true
+  },
+  {
+    "file": "valid-backup.json",
+    "schema": "backup",
+    "expected_valid": true
+  },
+  {
+    "file": "valid-collocation-candidate.json",
+    "schema": "collocation",
+    "expected_valid": true
+  },
+  {
+    "file": "valid-source-only-collocation.json",
+    "schema": "collocation",
+    "expected_valid": true
+  },
+  {
+    "file": "invalid-collocation-surface.json",
+    "schema": "collocation",
+    "expected_valid": false
+  },
+  {
+    "file": "invalid-unknown-field.json",
+    "schema": "source",
+    "expected_valid": false
+  }
+]

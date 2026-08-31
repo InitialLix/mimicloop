@@ -1,0 +1,29 @@
+{
+  "scanned_cards": 152,
+  "source_essays": 28,
+  "scanned_source_sentences": 361,
+  "candidate_collocations": 200,
+  "source_sentences_with_candidates": 181,
+  "source_sentences_without_candidates": 180,
+  "cards_with_candidates": 78,
+  "cards_without_candidates": 74,
+  "expression_types": {
+    "collocation": 166,
+    "fixed_phrase": 24,
+    "sentence_frame": 10
+  },
+  "core_candidates": 129,
+  "supporting_candidates": 71,
+  "multi_source_candidates": 7,
+  "candidates_with_card_links": 86,
+  "candidates_from_non_card_sentences": 115,
+  "exact_chunk_promotions": 34,
+  "ambiguous_dedup_groups": [
+    "quality-of-life",
+    "importance-on",
+    "take-steps-response",
+    "emphasis-on",
+    "role-in",
+    "effort-to"
+  ]
+}

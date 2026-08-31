@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/guided-writing-node-language-evaluation.schema.json",
+  "title": "Guided Writing Node Language Evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "attempt_id", "verdict", "dimensions", "errors",
+    "accepted_text", "feedback_en", "minimal_hint_en", "confidence", "needs_review"
+  ],
+  "properties": {
+    "schema_version": {"const": "guided-writing-node-language-evaluation.v1"},
+    "attempt_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "verdict": {"enum": ["pass", "retry", "cannot_judge"]},
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["meaning", "logic", "target_usage", "naturalness"],
+      "properties": {
+        "meaning": {"enum": ["complete", "partial", "missing", "cannot_judge"]},
+        "logic": {"enum": ["fits_node", "incomplete", "off_role", "contradictory", "cannot_judge"]},
+        "target_usage": {"enum": ["natural", "used_with_error", "not_used", "not_required", "cannot_judge"]},
+        "naturalness": {"enum": ["natural", "mostly_natural", "awkward", "unclear", "cannot_judge"]}
+      }
+    },
+    "errors": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dimension", "severity", "span", "message_en"],
+        "properties": {
+          "dimension": {"enum": ["meaning", "logic", "target_usage", "naturalness", "grammar", "spelling"]},
+          "severity": {"enum": ["minor", "blocking"]},
+          "span": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 300}, {"type": "null"}]},
+          "message_en": {"type": "string", "minLength": 1, "maxLength": 300}
+        }
+      }
+    },
+    "accepted_text": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 1200}, {"type": "null"}]},
+    "feedback_en": {"type": "string", "minLength": 1, "maxLength": 500},
+    "minimal_hint_en": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 240}, {"type": "null"}]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "needs_review": {"type": "boolean"}
+  }
+}

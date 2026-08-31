@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/guided-writing-chain-review.schema.json",
+  "title": "MimicLoop Guided Writing Full Chain Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "turn_id", "verdict", "return_to_node", "reason_code",
+    "feedback_en", "confidence", "needs_review"
+  ],
+  "properties": {
+    "schema_version": {"const": "guided-writing-chain-review.v1"},
+    "turn_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "verdict": {"enum": ["ready", "return_to_node", "cannot_judge"]},
+    "return_to_node": {
+      "oneOf": [
+        {"enum": ["stance", "claim", "reason", "mechanism", "result"]},
+        {"type": "null"}
+      ]
+    },
+    "reason_code": {
+      "oneOf": [
+        {"enum": [
+          "claim_role_mismatch", "reason_repeats_claim", "development_gap",
+          "result_not_supported", "content_repetition", "scope_drift",
+          "contradiction", "cannot_judge"
+        ]},
+        {"type": "null"}
+      ]
+    },
+    "feedback_en": {"type": "string", "minLength": 1, "maxLength": 240},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "needs_review": {"type": "boolean"}
+  }
+}

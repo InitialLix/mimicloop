@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.2.0",
+  "id": "99999999-9999-4999-8999-999999999999",
+  "canonical_text": "receive immediate feedback from",
+  "translation_prompt": "立即获得来自……的反馈",
+  "pattern": "receive immediate feedback from {person}",
+  "slots": [
+    {
+      "name": "person",
+      "role_zh": "反馈来源",
+      "replacement_examples": ["teachers", "customers", "local residents"]
+    }
+  ],
+  "expression_type": "collocation",
+  "grammar_pattern": null,
+  "usage_note": null,
+  "common_error": null,
+  "accepted_answers": ["receive immediate feedback from"],
+  "exercise_seed": {},
+  "topics": ["education_children", "technology_ai_digital_media"],
+  "argument_functions": [],
+  "source_links": [
+    {
+      "source_essay_id": "11111111-1111-4111-8111-111111111111",
+      "paragraph_index": 0,
+      "sentence_index": 2,
+      "sentence_text": "This interaction helps learners test ideas and receive immediate feedback from teachers and classmates.",
+      "card_id": null,
+      "surface_form": "receive immediate feedback from",
+      "learning_surface_form": null,
+      "occurrence_index": 0,
+      "learning_occurrence_index": null,
+      "role": "primary"
+    }
+  ],
+  "selection_scores": {
+    "naturalness": 5,
+    "active_recall_value": 4,
+    "transfer_value": 4,
+    "ielts_usefulness": 4
+  },
+  "difficulty": 3,
+  "normalized_text_hash": "ab3e645ca122fc5567691abe8064e1430bede98d842069773dcbd5debb94f356",
+  "deduplication": {
+    "group_key": "receive immediate feedback from",
+    "merge_target_id": null,
+    "confidence": "high",
+    "note": null
+  },
+  "recommendation_reasons": ["用于验证普通正文句可以成为 Collocation 的直接来源。"],
+  "uncertainties": [],
+  "workflow_status": "candidate",
+  "learning_mode": "recall_use",
+  "priority": "core",
+  "provenance": {
+    "guideline_version": "1.2.0",
+    "prompt_version": "collocation-full-corpus-extraction-v2",
+    "processor_type": "codex",
+    "model_id": "gpt-5"
+  },
+  "review_history": [
+    {
+      "action": "created",
+      "reviewer": "codex",
+      "reason": "由完整来源范文正文离线提取，等待人工审核。",
+      "reviewed_at": "2026-08-17T07:00:00.000Z"
+    }
+  ],
+  "content_revision": 1,
+  "created_at": "2026-08-17T07:00:00.000Z",
+  "updated_at": "2026-08-17T07:00:00.000Z"
+}

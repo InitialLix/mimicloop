@@ -1,0 +1,118 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1786867987759,
+      "tag": "0000_right_praxagora",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1786894000000,
+      "tag": "0001_adaptive_use_rollout",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1786937731780,
+      "tag": "0002_tiresome_runaways",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1786954381717,
+      "tag": "0003_curly_phantom_reporter",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1787108396169,
+      "tag": "0004_normal_marrow",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1787130600000,
+      "tag": "0005_phase2_use_evaluator",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1787130601000,
+      "tag": "0006_omniscient_maginty",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1787144407010,
+      "tag": "0007_slimy_silverclaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1787542191171,
+      "tag": "0008_clean_runaways",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1787558036072,
+      "tag": "0009_green_menace",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1787630485102,
+      "tag": "0010_guided_writing_sessions",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1787820709630,
+      "tag": "0011_guided_writing_paragraph_drafts",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1787830000000,
+      "tag": "0012_guided_writing_node_language_attempts",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1788074389937,
+      "tag": "0013_nappy_rattler",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1788105600000,
+      "tag": "0014_guided_writing_essay_closure",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "6",
+      "when": 1788134400000,
+      "tag": "0015_guided_writing_imported_prompts",
+      "breakpoints": true
+    }
+  ]
+}

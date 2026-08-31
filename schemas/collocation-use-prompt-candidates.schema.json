@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/collocation-use-prompt-candidates.schema.json",
+  "title": "Collocation Use Prompt Candidate Batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "items"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "generated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "collocation_id",
+          "prompt_zh",
+          "hints",
+          "target_surface",
+          "reference_answer",
+          "transfer_type",
+          "review_status",
+          "review_history"
+        ],
+        "properties": {
+          "collocation_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "prompt_zh": {"type": "string", "minLength": 1, "maxLength": 1000},
+          "hints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["zh", "en"],
+              "properties": {
+                "zh": {"type": "string", "minLength": 1, "maxLength": 100},
+                "en": {"type": "string", "minLength": 1, "maxLength": 200}
+              }
+            }
+          },
+          "target_surface": {"type": "string", "minLength": 2, "maxLength": 200},
+          "reference_answer": {"type": "string", "minLength": 10, "maxLength": 2000},
+          "transfer_type": {"enum": ["slot_replacement", "cross_topic"]},
+          "review_status": {"enum": ["candidate", "approved", "needs_edit", "rejected"]},
+          "review_history": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["action", "reviewer", "reason", "reviewed_at"],
+              "properties": {
+                "action": {"enum": ["created", "approved", "edited", "rejected"]},
+                "reviewer": {"type": "string", "minLength": 1, "maxLength": 200},
+                "reason": {"type": "string", "minLength": 1, "maxLength": 1000},
+                "reviewed_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

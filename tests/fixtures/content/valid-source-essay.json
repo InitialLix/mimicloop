@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "id": "11111111-1111-4111-8111-111111111111",
+  "title": "Synthetic education fixture",
+  "ielts_prompt": "Some people think online learning should replace classroom teaching. To what extent do you agree or disagree?",
+  "full_text": "Some people believe that digital lessons should replace classroom teaching. While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom. This interaction helps learners test ideas and receive immediate feedback from teachers and classmates.",
+  "paragraphs": [
+    {
+      "paragraph_index": 0,
+      "text": "Some people believe that digital lessons should replace classroom teaching. While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom. This interaction helps learners test ideas and receive immediate feedback from teachers and classmates.",
+      "content_hash": "db3134b295af459892ddbd9c1aff5cfa1d632674766728e1741196b2f865893b"
+    }
+  ],
+  "source_name": "MimicLoop Test Fixture",
+  "source_type": "manual_text",
+  "answer_origin": "user_authored",
+  "source_url": null,
+  "publication_ref": "tests/fixtures/content/valid-source-essay.json",
+  "author": "MimicLoop",
+  "question_type": "opinion",
+  "topics": ["education_children", "technology_ai_digital_media"],
+  "claimed_band": null,
+  "examiner_comments": null,
+  "accessed_at": "2026-08-16T06:00:00Z",
+  "local_raw_file": "sources/raw/test-fixture.txt",
+  "content_hash": "db3134b295af459892ddbd9c1aff5cfa1d632674766728e1741196b2f865893b",
+  "rights_note": "Synthetic content used only for schema tests; not a production learning source.",
+  "created_at": "2026-08-16T06:00:00Z",
+  "updated_at": "2026-08-16T06:00:00Z"
+}

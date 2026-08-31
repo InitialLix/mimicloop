@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "candidate_id": "22222222-2222-4222-8222-222222222222",
+  "card": {
+    "schema_version": "1.0.0",
+    "id": "33333333-3333-4333-8333-333333333333",
+    "source_essay_id": "11111111-1111-4111-8111-111111111111",
+    "original_sentence": "While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom.",
+    "learning_sentence": "While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom.",
+    "learning_edits": [],
+    "translation_zh": "尽管在线课程可以扩大教育的可及性，但它们无法完全取代实体课堂中的互动。",
+    "context_before": "Some people believe that digital lessons should replace classroom teaching.",
+    "context_after": "This interaction helps learners test ideas and receive immediate feedback from teachers and classmates.",
+    "paragraph_index": 0,
+    "sentence_index": 1,
+    "task": "academic_task_2",
+    "question_types": ["opinion"],
+    "topics": ["education_children", "technology_ai_digital_media"],
+    "argument_functions": ["concession", "counterargument"],
+    "primary_focus": "mixed",
+    "chunks": [
+      {
+        "text": "widen access to",
+        "meaning_zh": "扩大……的可及性",
+        "note": "常用于教育、医疗或公共服务语境。"
+      }
+    ],
+    "glosses": [
+      {
+        "text": "interaction",
+        "lemma": "interaction",
+        "part_of_speech": "noun",
+        "meaning_zh": "互动；交流",
+        "note": "这里指师生在实体课堂中的交流。",
+        "occurrence_index": 0
+      }
+    ],
+    "pattern": "While {digital_option} can {benefit}, it cannot fully replace {in_person_value}.",
+    "slots": [
+      {
+        "name": "digital_option",
+        "role_zh": "线上或技术方案",
+        "original_value": "online courses",
+        "replacement_examples": ["remote consultations"]
+      },
+      {
+        "name": "benefit",
+        "role_zh": "该方案能够带来的好处",
+        "original_value": "widen access to education",
+        "replacement_examples": ["improve access to basic healthcare"]
+      },
+      {
+        "name": "in_person_value",
+        "role_zh": "无法被完全替代的线下价值",
+        "original_value": "the interaction that takes place in a physical classroom",
+        "replacement_examples": ["the reassurance provided by face-to-face care"]
+      }
+    ],
+    "grammar_note": "While 引导让步从句，主句直接给出限制；不要再加 but。",
+    "usage_note": "适合承认技术方案的优点后限定其替代范围。",
+    "simplified_version": "Online courses improve access to education, but classroom interaction remains important.",
+    "transfer_example": "While remote consultations can improve access to basic healthcare, they cannot fully replace the reassurance provided by face-to-face care.",
+    "exercise_seed": {
+      "chunk_cloze": [
+        {
+          "chunk_text": "widen access to",
+          "prompt_sentence": "While online courses can _____ education, they cannot fully replace classroom interaction.",
+          "reference_answer": "widen access to"
+        }
+      ],
+      "translation_recall": {
+        "prompt_zh": "尽管在线课程可以扩大教育的可及性，但它们无法完全取代实体课堂中的互动。",
+        "reference_answer": "While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom."
+      },
+      "slot_replacement": [
+        {
+          "prompt_zh": "将结构迁移到远程医疗主题。",
+          "slot_values": [
+            {"slot_name": "digital_option", "value": "remote consultations"},
+            {"slot_name": "benefit", "value": "improve access to basic healthcare"},
+            {"slot_name": "in_person_value", "value": "the reassurance provided by face-to-face care"}
+          ],
+          "reference_answer": "While remote consultations can improve access to basic healthcare, they cannot fully replace the reassurance provided by face-to-face care."
+        }
+      ]
+    },
+    "difficulty": 3,
+    "transfer_value": 5,
+    "source_reliability": "user_verified",
+    "content_status": "candidate",
+    "content_revision": 1,
+    "normalized_text_hash": "19e935b0524a4b59773f45933d2ef9a72370743229d65b1a830176d17af996c9",
+    "created_at": "2026-08-16T06:00:00Z",
+    "updated_at": "2026-08-16T06:00:00Z"
+  },
+  "source_match": {
+    "match_type": "exact",
+    "matched_text": "While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom.",
+    "paragraph_index": 0,
+    "sentence_index": 1
+  },
+  "selection_scores": {
+    "naturalness": 5,
+    "context_independence": 5,
+    "vocabulary_value": 4,
+    "structure_value": 5,
+    "transfer_value": 5
+  },
+  "recommendation_reasons": [
+    "同时展示让步与限制，结构可迁移到教育以外的主题。",
+    "widen access to 是自然且高复用的搭配。"
+  ],
+  "uncertainties": [],
+  "workflow_status": "candidate",
+  "priority": "core",
+  "provenance": {
+    "guideline_version": "1.0.0",
+    "prompt_version": "fixture-1.0.0",
+    "processor_type": "manual",
+    "model_id": null
+  },
+  "review_history": [
+    {
+      "action": "created",
+      "reviewer": "fixture",
+      "reason": "Created as a synthetic schema test fixture.",
+      "reviewed_at": "2026-08-16T06:00:00Z"
+    }
+  ],
+  "created_at": "2026-08-16T06:00:00Z",
+  "updated_at": "2026-08-16T06:00:00Z"
+}

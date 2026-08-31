@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/common.schema.json",
+  "title": "MimicLoop shared definitions",
+  "$defs": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "questionType": {
+      "type": "string",
+      "enum": [
+        "opinion",
+        "discussion",
+        "advantages_disadvantages",
+        "positive_negative_development",
+        "causes_solutions",
+        "two_part_multi_part"
+      ]
+    },
+    "topic": {
+      "type": "string",
+      "enum": [
+        "education_children",
+        "technology_ai_digital_media",
+        "environment_energy_animals",
+        "health_diet_lifestyle",
+        "government_public_policy_spending",
+        "work_economy_business_consumption",
+        "society_family_population_equality",
+        "crime_law_punishment",
+        "culture_art_language_media",
+        "cities_housing_transport",
+        "globalization_tourism_migration",
+        "science_space_ethics"
+      ]
+    },
+    "argumentFunction": {
+      "type": "string",
+      "enum": [
+        "paraphrase_prompt",
+        "state_position",
+        "topic_sentence",
+        "explain_mechanism",
+        "give_example",
+        "describe_result",
+        "concession",
+        "counterargument",
+        "compare_or_weigh",
+        "qualify_claim",
+        "propose_solution",
+        "conclude_or_infer"
+      ]
+    },
+    "primaryFocus": {
+      "type": "string",
+      "enum": ["vocabulary", "structure", "mixed"]
+    },
+    "sourceReliability": {
+      "type": "string",
+      "enum": [
+        "official_scored_candidate",
+        "official_examiner_model",
+        "official_calibration",
+        "teacher_authored",
+        "teacher_reviewed",
+        "published_language_source",
+        "user_verified"
+      ]
+    },
+    "contentStatus": {
+      "type": "string",
+      "enum": ["candidate", "needs_edit", "approved", "deferred", "rejected", "archived"]
+    },
+    "exerciseType": {
+      "type": "string",
+      "enum": ["chunk_cloze", "translation_recall", "slot_replacement", "guided_application"]
+    },
+    "selfRating": {
+      "type": "string",
+      "enum": ["forgot", "fuzzy", "recalled", "can_use"]
+    },
+    "learningStage": {
+      "type": "string",
+      "enum": ["new", "learned", "recall", "use", "transfer", "compose"]
+    },
+    "collocationExpressionType": {
+      "type": "string",
+      "enum": ["collocation", "fixed_phrase", "sentence_frame"]
+    },
+    "collocationWorkflowStatus": {
+      "type": "string",
+      "enum": ["candidate", "needs_edit", "approved", "deferred", "rejected", "merged", "archived"]
+    },
+    "collocationReviewAction": {
+      "type": "string",
+      "enum": ["created", "marked_needs_edit", "edited", "approved", "deferred", "rejected", "merged", "archived", "restored"]
+    }
+  }
+}

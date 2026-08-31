@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/guided-writing-task2-prompt-analysis.schema.json",
+  "title": "MimicLoop Imported IELTS Task 2 Prompt Analysis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "analysis_id", "is_task_2", "question_type", "topic", "reason_zh", "confidence", "needs_review"],
+  "properties": {
+    "schema_version": {"const": "guided-writing-task2-prompt-analysis.v1"},
+    "analysis_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "is_task_2": {"type": "boolean"},
+    "question_type": {
+      "oneOf": [
+        {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/questionType"},
+        {"type": "null"}
+      ]
+    },
+    "topic": {
+      "oneOf": [
+        {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/topic"},
+        {"type": "null"}
+      ]
+    },
+    "reason_zh": {"type": "string", "minLength": 1, "maxLength": 180},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "needs_review": {"type": "boolean"}
+  }
+}

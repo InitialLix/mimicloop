@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/guided-writing-full-essay-evaluation.schema.json",
+  "title": "MimicLoop Guided Writing Full Essay Evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "review_id", "task_response", "coherence", "language", "confidence", "needs_review"],
+  "properties": {
+    "schema_version": {"const": "guided-writing-full-essay-evaluation.v1"},
+    "review_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "task_response": {"$ref": "#/$defs/task_axis"},
+    "coherence": {"$ref": "#/$defs/coherence_axis"},
+    "language": {"$ref": "#/$defs/language_axis"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "needs_review": {"type": "boolean"}
+  },
+  "$defs": {
+    "task_axis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "strength_en", "issue_type", "evidence_span", "feedback_en"],
+      "properties": {
+        "status": {"enum": ["clear", "needs_revision", "cannot_judge"]},
+        "strength_en": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 220}, {"type": "null"}]},
+        "issue_type": {"oneOf": [{"enum": ["incomplete_response", "position_inconsistent", "body_map_inconsistent", "off_task", "unsupported_claim"]}, {"type": "null"}]},
+        "evidence_span": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 600}, {"type": "null"}]},
+        "feedback_en": {"type": "string", "minLength": 1, "maxLength": 280}
+      }
+    },
+    "coherence_axis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "strength_en", "issue_type", "evidence_span", "feedback_en"],
+      "properties": {
+        "status": {"enum": ["clear", "needs_revision", "cannot_judge"]},
+        "strength_en": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 220}, {"type": "null"}]},
+        "issue_type": {"oneOf": [{"enum": ["progression", "cross_paragraph_repetition", "weak_transition", "paragraph_role_overlap", "introduction_body_mismatch", "conclusion_mismatch"]}, {"type": "null"}]},
+        "evidence_span": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 600}, {"type": "null"}]},
+        "feedback_en": {"type": "string", "minLength": 1, "maxLength": 280}
+      }
+    },
+    "language_axis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "strength_en", "issue_type", "severity", "evidence_span", "feedback_en"],
+      "properties": {
+        "status": {"enum": ["clear", "needs_revision", "cannot_judge"]},
+        "strength_en": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 220}, {"type": "null"}]},
+        "issue_type": {"oneOf": [{"enum": ["meaning_unclear", "grammar", "spelling", "collocation", "word_choice", "cohesion", "register", "sentence_boundary"]}, {"type": "null"}]},
+        "severity": {"oneOf": [{"enum": ["minor", "blocking"]}, {"type": "null"}]},
+        "evidence_span": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 600}, {"type": "null"}]},
+        "feedback_en": {"type": "string", "minLength": 1, "maxLength": 280}
+      }
+    }
+  }
+}

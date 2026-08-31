@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/collocation.schema.json",
+  "title": "MimicLoop Collocation Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "canonical_text",
+    "translation_prompt",
+    "pattern",
+    "slots",
+    "expression_type",
+    "grammar_pattern",
+    "usage_note",
+    "common_error",
+    "accepted_answers",
+    "exercise_seed",
+    "topics",
+    "argument_functions",
+    "source_links",
+    "selection_scores",
+    "difficulty",
+    "normalized_text_hash",
+    "deduplication",
+    "recommendation_reasons",
+    "uncertainties",
+    "workflow_status",
+    "learning_mode",
+    "priority",
+    "provenance",
+    "review_history",
+    "content_revision",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.2.0"
+    },
+    "id": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+    },
+    "canonical_text": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 200
+    },
+    "translation_prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "pattern": {
+      "oneOf": [
+        {"type": "string", "minLength": 2, "maxLength": 300},
+        {"type": "null"}
+      ]
+    },
+    "slots": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "role_zh", "replacement_examples"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "role_zh": {"type": "string", "minLength": 1, "maxLength": 120},
+          "replacement_examples": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 8,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1, "maxLength": 160}
+          }
+        }
+      }
+    },
+    "expression_type": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/collocationExpressionType"
+    },
+    "grammar_pattern": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 240},
+        {"type": "null"}
+      ]
+    },
+    "usage_note": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 360},
+        {"type": "null"}
+      ]
+    },
+    "common_error": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 360},
+        {"type": "null"}
+      ]
+    },
+    "accepted_answers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 2, "maxLength": 200}
+    },
+    "exercise_seed": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "guided_application": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt_zh", "hints", "target_surface", "reference_answer", "transfer_type"],
+          "properties": {
+            "prompt_zh": {"type": "string", "minLength": 1, "maxLength": 1000},
+            "hints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["zh", "en"],
+                "properties": {
+                  "zh": {"type": "string", "minLength": 1, "maxLength": 100},
+                  "en": {"type": "string", "minLength": 1, "maxLength": 200}
+                }
+              }
+            },
+            "target_surface": {"type": "string", "minLength": 2, "maxLength": 200},
+            "reference_answer": {"type": "string", "minLength": 10, "maxLength": 2000},
+            "transfer_type": {"enum": ["slot_replacement", "cross_topic"]}
+          }
+        }
+      }
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/topic"
+      }
+    },
+    "argument_functions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/argumentFunction"
+      }
+    },
+    "source_links": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_essay_id",
+          "paragraph_index",
+          "sentence_index",
+          "sentence_text",
+          "card_id",
+          "surface_form",
+          "learning_surface_form",
+          "occurrence_index",
+          "learning_occurrence_index",
+          "role"
+        ],
+        "properties": {
+          "source_essay_id": {
+            "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+          },
+          "paragraph_index": {"type": "integer", "minimum": 0},
+          "sentence_index": {"type": "integer", "minimum": 0},
+          "sentence_text": {"type": "string", "minLength": 2, "maxLength": 2000},
+          "card_id": {
+            "oneOf": [
+              {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+              {"type": "null"}
+            ]
+          },
+          "surface_form": {"type": "string", "minLength": 2, "maxLength": 200},
+          "learning_surface_form": {
+            "oneOf": [
+              {"type": "string", "minLength": 2, "maxLength": 200},
+              {"type": "null"}
+            ]
+          },
+          "occurrence_index": {"type": "integer", "minimum": 0},
+          "learning_occurrence_index": {
+            "oneOf": [
+              {"type": "integer", "minimum": 0},
+              {"type": "null"}
+            ]
+          },
+          "role": {"type": "string", "enum": ["primary", "supporting"]}
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "card_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+              "learning_surface_form": {"type": "string", "minLength": 2, "maxLength": 200},
+              "learning_occurrence_index": {"type": "integer", "minimum": 0}
+            }
+          },
+          {
+            "properties": {
+              "card_id": {"type": "null"},
+              "learning_surface_form": {"type": "null"},
+              "learning_occurrence_index": {"type": "null"}
+            }
+          }
+        ]
+      }
+    },
+    "selection_scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["naturalness", "active_recall_value", "transfer_value", "ielts_usefulness"],
+      "properties": {
+        "naturalness": {"type": "integer", "minimum": 1, "maximum": 5},
+        "active_recall_value": {"type": "integer", "minimum": 1, "maximum": 5},
+        "transfer_value": {"type": "integer", "minimum": 1, "maximum": 5},
+        "ielts_usefulness": {"type": "integer", "minimum": 1, "maximum": 5}
+      }
+    },
+    "difficulty": {"type": "integer", "minimum": 1, "maximum": 5},
+    "normalized_text_hash": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"
+    },
+    "deduplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["group_key", "merge_target_id", "confidence", "note"],
+      "properties": {
+        "group_key": {"type": "string", "minLength": 2, "maxLength": 200},
+        "merge_target_id": {
+          "oneOf": [
+            {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+            {"type": "null"}
+          ]
+        },
+        "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+        "note": {
+          "oneOf": [
+            {"type": "string", "minLength": 1, "maxLength": 500},
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "recommendation_reasons": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 500}
+    },
+    "uncertainties": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 500}
+    },
+    "workflow_status": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/collocationWorkflowStatus"
+    },
+    "learning_mode": {
+      "type": "string",
+      "enum": ["recall_use", "appreciation"]
+    },
+    "priority": {"type": "string", "enum": ["core", "supporting"]},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["guideline_version", "prompt_version", "processor_type", "model_id"],
+      "properties": {
+        "guideline_version": {"type": "string", "const": "1.2.0"},
+        "prompt_version": {"type": "string", "minLength": 1, "maxLength": 100},
+        "processor_type": {"type": "string", "enum": ["codex", "manual", "external_llm"]},
+        "model_id": {
+          "oneOf": [
+            {"type": "string", "minLength": 1, "maxLength": 200},
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "review_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action", "reviewer", "reason", "reviewed_at"],
+        "properties": {
+          "action": {
+            "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/collocationReviewAction"
+          },
+          "reviewer": {"type": "string", "minLength": 1, "maxLength": 200},
+          "reason": {"type": "string", "minLength": 1, "maxLength": 1000},
+          "reviewed_at": {
+            "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+          }
+        }
+      }
+    },
+    "content_revision": {"type": "integer", "minimum": 1},
+    "created_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    },
+    "updated_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"learning_mode": {"const": "appreciation"}},
+        "required": ["learning_mode"]
+      },
+      "then": {
+        "properties": {
+          "exercise_seed": {"type": "object", "maxProperties": 0}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"expression_type": {"const": "sentence_frame"}},
+        "required": ["expression_type"]
+      },
+      "then": {
+        "properties": {
+          "pattern": {"type": "string", "minLength": 2},
+          "slots": {"type": "array", "minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"workflow_status": {"const": "merged"}},
+        "required": ["workflow_status"]
+      },
+      "then": {
+        "properties": {
+          "deduplication": {
+            "type": "object",
+            "properties": {
+              "merge_target_id": {
+                "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

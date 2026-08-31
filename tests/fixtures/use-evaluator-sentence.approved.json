@@ -1,0 +1,177 @@
+{
+  "schema_version": "use-evaluator-sentence-candidate.v1",
+  "review_status": "approved",
+  "created_by": "codex",
+  "created_at": "2026-08-20T01:00:00.000+08:00",
+  "review_note": "The original 17 Sentence Use labels were approved on 2026-08-20; the mechanical-typo standard and simulationr regression case were approved by the user on 2026-08-24.",
+  "human_review": {
+    "reviewed_by": "user",
+    "last_reviewed_at": "2026-08-24T16:30:00.000+08:00",
+    "approved_case_ids": [
+      "sentence-pattern-reference",
+      "sentence-pattern-natural-variant",
+      "sentence-pattern-missing-structure",
+      "sentence-pattern-minor-agreement",
+      "sentence-pattern-partial-meaning",
+      "sentence-pattern-semantic-reversal",
+      "sentence-pattern-malformed-frame",
+      "sentence-pattern-chinese-only",
+      "sentence-chunk-reference",
+      "sentence-chunk-natural-variant",
+      "sentence-chunk-missing-target",
+      "sentence-chunk-wrong-preposition",
+      "sentence-chunk-minor-agreement",
+      "sentence-chunk-target-spelling",
+      "sentence-chunk-semantic-reversal",
+      "sentence-chunk-partial-meaning",
+      "sentence-chunk-empty",
+      "sentence-pattern-obvious-typo"
+    ]
+  },
+  "cases": [
+    {
+      "id": "sentence-pattern-reference",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "Another reason why co-working spaces are increasingly popular is that they often offer flexible rental terms, and they are maintained by professional teams.",
+      "tags": ["sentence_pattern", "fully_correct", "expected_answer"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": []}
+    },
+    {
+      "id": "sentence-pattern-natural-variant",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "One reason why co-working spaces have become more popular is that they provide flexible rental terms and are professionally managed.",
+      "tags": ["sentence_pattern", "natural_paraphrase", "no_literal_pattern_match"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": []}
+    },
+    {
+      "id": "sentence-pattern-missing-structure",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "Co-working spaces have flexible leases and professional management, so they are becoming more popular.",
+      "tags": ["sentence_pattern", "complete_meaning_missing_target"],
+      "expected": {"verdict": "retry", "meaning": "complete", "target_expression": "not_used", "grammar": "ok", "collocation": "natural", "blocking": ["target_expression"]}
+    },
+    {
+      "id": "sentence-pattern-minor-agreement",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "Another reason why co-working spaces are increasingly popular is that they often offers flexible rental terms, and they are maintained by professional teams.",
+      "tags": ["sentence_pattern", "minor_grammar", "subject_verb_agreement"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "minor_issue", "collocation": "natural", "blocking": []}
+    },
+    {
+      "id": "sentence-pattern-partial-meaning",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "Another reason why co-working spaces are increasingly popular is that they often offer flexible rental terms.",
+      "tags": ["sentence_pattern", "partial_meaning", "missing_second_cause"],
+      "expected": {"verdict": "incomplete", "meaning": "partial", "target_expression": "used_with_error", "grammar": "ok", "collocation": "natural", "blocking": ["meaning"]}
+    },
+    {
+      "id": "sentence-pattern-semantic-reversal",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "Another reason why co-working spaces are becoming less popular is that they offer flexible rental terms, and they are maintained by professional teams.",
+      "tags": ["sentence_pattern", "grammatical_semantically_wrong"],
+      "expected": {"verdict": "retry", "meaning": "missing", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": ["meaning"]}
+    },
+    {
+      "id": "sentence-pattern-malformed-frame",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "Another reason of why co-working spaces popular is because flexible rental terms, and maintained professional teams.",
+      "tags": ["sentence_pattern", "target_used_unnaturally", "multiple_errors"],
+      "expected": {"verdict": "retry", "meaning": "complete", "target_expression": "used_with_error", "grammar": "major_issue", "collocation": "awkward", "blocking": ["target_expression"]}
+    },
+    {
+      "id": "sentence-pattern-chinese-only",
+      "asset_id": "2ea1508c-eda6-546a-8d3c-9ec6d3deda93",
+      "exercise_ref": "sentence:2ea1508c-eda6-546a-8d3c-9ec6d3deda93:slot_replacement:3",
+      "answer": "共享办公空间因为租期灵活而且有专业团队维护，所以越来越受欢迎。",
+      "tags": ["sentence_pattern", "chinese_only"],
+      "expected": {"verdict": "cannot_judge", "meaning": "complete", "target_expression": "not_used", "grammar": "cannot_judge", "collocation": "cannot_judge", "blocking": ["target_expression"]}
+    },
+    {
+      "id": "sentence-chunk-reference",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The decline in urban air quality has been linked in part to heavier traffic and continued reliance on fossil fuels.",
+      "tags": ["sentence_chunk", "fully_correct", "expected_answer"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": []}
+    },
+    {
+      "id": "sentence-chunk-natural-variant",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "Worsening urban air quality has been linked in part to increased traffic and the continued use of fossil fuels.",
+      "tags": ["sentence_chunk", "natural_paraphrase"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": []}
+    },
+    {
+      "id": "sentence-chunk-missing-target",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The decline in urban air quality is partly caused by heavier traffic and continued reliance on fossil fuels.",
+      "tags": ["sentence_chunk", "complete_meaning_missing_target"],
+      "expected": {"verdict": "retry", "meaning": "complete", "target_expression": "not_used", "grammar": "ok", "collocation": "natural", "blocking": ["target_expression"]}
+    },
+    {
+      "id": "sentence-chunk-wrong-preposition",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The decline in urban air quality has been linked in part with heavier traffic and continued reliance on fossil fuels.",
+      "tags": ["sentence_chunk", "wrong_preposition_collocation"],
+      "expected": {"verdict": "retry", "meaning": "complete", "target_expression": "used_with_error", "grammar": "ok", "collocation": "incorrect", "blocking": ["target_expression"]}
+    },
+    {
+      "id": "sentence-chunk-minor-agreement",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The decline in urban air quality have been linked in part to heavier traffic and continued reliance on fossil fuels.",
+      "tags": ["sentence_chunk", "minor_grammar", "subject_verb_agreement"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "minor_issue", "collocation": "natural", "blocking": []}
+    },
+    {
+      "id": "sentence-chunk-target-spelling",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The decline in urban air quality has been linnked in part to heavier traffic and continued reliance on fossil fuels.",
+      "tags": ["sentence_chunk", "target_spelling_error"],
+      "expected": {"verdict": "retry", "meaning": "complete", "target_expression": "used_with_error", "grammar": "minor_issue", "collocation": "incorrect", "blocking": ["target_expression"]}
+    },
+    {
+      "id": "sentence-chunk-semantic-reversal",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The improvement in urban air quality has been linked in part to heavier traffic and continued reliance on fossil fuels.",
+      "tags": ["sentence_chunk", "grammatical_semantically_wrong"],
+      "expected": {"verdict": "retry", "meaning": "missing", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": ["meaning"]}
+    },
+    {
+      "id": "sentence-chunk-partial-meaning",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "The decline in urban air quality has been linked in part to heavier traffic.",
+      "tags": ["sentence_chunk", "partial_meaning"],
+      "expected": {"verdict": "incomplete", "meaning": "partial", "target_expression": "natural", "grammar": "ok", "collocation": "natural", "blocking": ["meaning"]}
+    },
+    {
+      "id": "sentence-chunk-empty",
+      "asset_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "exercise_ref": "sentence:0b0ee530-2f77-5d25-a6cb-6baa331b7c26:guided_application:3",
+      "answer": "",
+      "tags": ["sentence_chunk", "empty"],
+      "expected": {"verdict": "incomplete", "meaning": "missing", "target_expression": "not_used", "grammar": "cannot_judge", "collocation": "cannot_judge", "blocking": ["meaning"]}
+    },
+    {
+      "id": "sentence-pattern-obvious-typo",
+      "asset_id": "c5133f81-0e4e-50ac-b903-7d93f37e621a",
+      "exercise_ref": "sentence:c5133f81-0e4e-50ac-b903-7d93f37e621a:slot_replacement:2",
+      "answer": "Some student nurses choose to rely on online simulationr rather than gain experience on hospital wards, and virtual exercises are a poor substitute for contact with real patients.",
+      "tags": ["sentence_pattern", "obvious_typo", "shared_infinitive"],
+      "expected": {"verdict": "pass", "meaning": "complete", "target_expression": "natural", "grammar": "minor_issue", "collocation": "natural", "blocking": [], "non_blocking": ["typo"]}
+    }
+  ]
+}

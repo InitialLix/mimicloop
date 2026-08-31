@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.1.0",
+  "generated_at": "2026-08-16T12:30:00Z",
+  "items": [
+    {
+      "card_id": "32e7fe21-e97e-5ac3-a5b0-fc9e2763abf6",
+      "mode": "structure",
+      "prompt_zh": "虽然我承认在线学习可以扩大受教育机会，但我认为，如果不加限制，它更可能削弱课堂互动。",
+      "hints": [
+        {
+          "zh": "扩大受教育机会",
+          "en": "widen access to education"
+        },
+        {
+          "zh": "削弱课堂互动",
+          "en": "weaken classroom interaction"
+        },
+        {
+          "zh": "不加限制",
+          "en": "without limits"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "While I accept that online learning can widen access to education, I believe that it is more likely to weaken classroom interaction when used without limits.",
+      "review_status": "approved",
+      "feedback_pattern": "While I accept that online learning can {content_1}, I believe that it is more likely to {content_2} when used {content_3}."
+    },
+    {
+      "card_id": "01b9fc42-06ef-53f7-a5a1-0ed9645cedf5",
+      "mode": "structure",
+      "prompt_zh": "从社会角度看，社区体育能够培养合作精神和自律；这些都是在学校和工作中很有价值的能力。",
+      "hints": [
+        {
+          "zh": "社区体育",
+          "en": "community sports"
+        },
+        {
+          "zh": "合作精神",
+          "en": "cooperation"
+        },
+        {
+          "zh": "自律",
+          "en": "self-discipline"
+        },
+        {
+          "zh": "在学校和工作中很有价值的能力",
+          "en": "valuable skills in school and at work"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "From a social perspective, community sports encourage cooperation and self-discipline, all of which are valuable skills in school and at work.",
+      "review_status": "approved",
+      "feedback_pattern": "From a social perspective, {content_1} encourage {content_2} and {content_3}, all of which are {content_4}."
+    },
+    {
+      "card_id": "4c57ddce-4151-5fe4-bc60-90e3b85b78f7",
+      "mode": "structure",
+      "prompt_zh": "当人们牺牲休息来延长工作时间时，这种过度工作可能造成从持续疲劳到严重健康问题等一系列后果。",
+      "hints": [
+        {
+          "zh": "过度工作",
+          "en": "overwork"
+        },
+        {
+          "zh": "持续疲劳",
+          "en": "persistent fatigue"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "This type of overwork can have effects ranging from persistent fatigue to serious health problems, especially when people sacrifice rest to work longer hours.",
+      "review_status": "approved",
+      "feedback_pattern": "This type of {content_1} can have effects ranging from {content_2} to serious health problems, especially when people sacrifice rest to work longer hours."
+    },
+    {
+      "card_id": "0b0ee530-2f77-5d25-a6cb-6baa331b7c26",
+      "mode": "vocabulary",
+      "prompt_zh": "城市空气质量的下降，被认为在一定程度上与交通量增加以及持续依赖化石燃料有关。",
+      "hints": [
+        {
+          "zh": "城市空气质量",
+          "en": "urban air quality"
+        },
+        {
+          "zh": "交通量增加",
+          "en": "heavier traffic"
+        },
+        {
+          "zh": "化石燃料",
+          "en": "fossil fuels"
+        }
+      ],
+      "target_chunk": "linked in part to",
+      "reference_answer": "The decline in urban air quality has been linked in part to heavier traffic and continued reliance on fossil fuels.",
+      "review_status": "approved",
+      "feedback_pattern": null
+    },
+    {
+      "card_id": "4c1ff5ac-d150-537d-a5d6-8b0fd06fe278",
+      "mode": "vocabulary",
+      "prompt_zh": "没有任何有说服力的理由说明低收入学生应该被排除在高等教育之外。",
+      "hints": [
+        {
+          "zh": "低收入学生",
+          "en": "low-income students"
+        },
+        {
+          "zh": "被排除在高等教育之外",
+          "en": "excluded from higher education"
+        }
+      ],
+      "target_chunk": "there is no compelling reason why",
+      "reference_answer": "There is no compelling reason why low-income students should be excluded from higher education.",
+      "review_status": "approved",
+      "feedback_pattern": null
+    },
+    {
+      "card_id": "a5a070ab-d78f-5404-9271-da60cc2c8b61",
+      "mode": "vocabulary",
+      "prompt_zh": "城市不需要为了容纳不断增长的人口，而开发每一寸土地。",
+      "hints": [
+        {
+          "zh": "容纳不断增长的人口",
+          "en": "accommodate a growing population"
+        }
+      ],
+      "target_chunk": "every last square metre of land",
+      "reference_answer": "Cities do not need to develop every last square metre of land in order to accommodate a growing population.",
+      "review_status": "approved",
+      "feedback_pattern": null
+    },
+    {
+      "card_id": "4c4447fc-9bbf-5e22-8c85-ba8143f06a14",
+      "mode": "structure",
+      "prompt_zh": "通常正是对预防性医疗的投入确保了疾病能够被及早发现；许多公共卫生专家也认为，这些服务对医疗体系的长期韧性至关重要。",
+      "hints": [
+        {
+          "zh": "预防性医疗",
+          "en": "preventive healthcare"
+        },
+        {
+          "zh": "疾病能够被及早发现",
+          "en": "early detection of disease"
+        },
+        {
+          "zh": "长期韧性",
+          "en": "long-term resilience"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "It is usually investment in preventive healthcare that ensures the early detection of disease, and many public-health experts agree that these services are also crucial for the long-term resilience of health systems.",
+      "review_status": "approved",
+      "feedback_pattern": "It is usually investment in {content_1} that ensures the {content_2}, and many public-health experts agree that these services are also crucial for the {content_3} of health systems."
+    },
+    {
+      "card_id": "10f5261a-aa1f-540a-a06e-ced6247d7222",
+      "mode": "structure",
+      "prompt_zh": "如果我们不维护老化的基础设施，修复由此造成的损坏所需的成本，将远远超过定期维护的成本。",
+      "hints": [
+        {
+          "zh": "老化的基础设施",
+          "en": "ageing infrastructure"
+        },
+        {
+          "zh": "由此造成的损坏",
+          "en": "resulting damage"
+        },
+        {
+          "zh": "定期维护",
+          "en": "regular maintenance"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "If we failed to maintain ageing infrastructure, the costs of repairing the resulting damage would far outweigh the costs of regular maintenance.",
+      "review_status": "approved",
+      "feedback_pattern": "If we failed to maintain {content_1}, the costs of repairing the {content_2} would far outweigh the costs of {content_3}."
+    },
+    {
+      "card_id": "848db1ba-b554-5af3-9337-5ff5995cd850",
+      "mode": "structure",
+      "prompt_zh": "通过投资可靠的公共交通，我们可以减少拥堵，并改善人们获得工作机会的条件。",
+      "hints": [
+        {
+          "zh": "可靠的公共交通",
+          "en": "reliable public transport"
+        },
+        {
+          "zh": "拥堵",
+          "en": "congestion"
+        },
+        {
+          "zh": "获得工作机会",
+          "en": "access to jobs"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "By investing in reliable public transport, we reduce congestion and improve access to jobs.",
+      "review_status": "approved",
+      "feedback_pattern": "By investing in {content_1}, we reduce {content_2} and improve {content_3}."
+    },
+    {
+      "card_id": "5caaf5a0-b599-5749-9004-9c8b8eaeb603",
+      "mode": "structure",
+      "prompt_zh": "虽然有人认为政府应当限制人们进入市中心，但我认为居民应当保留选择出行方式的自由。",
+      "hints": [
+        {
+          "zh": "限制人们进入市中心",
+          "en": "restrict access to city centres"
+        },
+        {
+          "zh": "保留选择出行方式的自由",
+          "en": "remain free to choose how they travel"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "While some argue that governments should restrict access to city centres, I believe that residents should remain free to choose how they travel.",
+      "review_status": "approved",
+      "feedback_pattern": "While some argue that governments should {content_1}, I believe that residents should {content_2}."
+    },
+    {
+      "card_id": "9f289ff7-319b-5763-9a3f-7a6a576c30d9",
+      "mode": "structure",
+      "prompt_zh": "从个人角度看，可以认为弹性工作安排能带来更大的自主性、更低的通勤成本和更多陪伴家人的时间，从而提高许多员工的生活质量。",
+      "hints": [
+        {
+          "zh": "弹性工作安排",
+          "en": "flexible working arrangements"
+        },
+        {
+          "zh": "自主性",
+          "en": "autonomy"
+        },
+        {
+          "zh": "通勤成本",
+          "en": "commuting costs"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "From a personal perspective, it can be argued that flexible working arrangements provide greater autonomy, lower commuting costs and more family time, and therefore a better quality of life for many employees.",
+      "review_status": "approved",
+      "feedback_pattern": "From a personal perspective, it can be argued that {content_1} provide greater {content_2}, lower {content_3} and more family time, and therefore a better quality of life for many employees."
+    },
+    {
+      "card_id": "c32302d0-ea7c-5000-bc58-f971b91e0228",
+      "mode": "structure",
+      "prompt_zh": "从社会层面看，为紧缺职业提供培训，可以帮助政府填补基本服务中的关键知识和技能缺口。",
+      "hints": [
+        {
+          "zh": "紧缺职业",
+          "en": "shortage occupations"
+        },
+        {
+          "zh": "基本服务",
+          "en": "essential services"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "At a societal level, funding training for shortage occupations can help governments fill critical knowledge and skill gaps in essential services.",
+      "review_status": "approved",
+      "feedback_pattern": "At a societal level, funding training for {content_1} can help governments fill critical knowledge and skill gaps in {content_2}."
+    },
+    {
+      "card_id": "d0af186f-5278-5fa9-8fbc-b32d65f886d3",
+      "mode": "vocabulary",
+      "prompt_zh": "公共服务对技术的重视可以提高效率、降低成本并扩大服务覆盖面。",
+      "hints": [
+        {
+          "zh": "公共服务",
+          "en": "public services"
+        },
+        {
+          "zh": "提高效率",
+          "en": "improve efficiency"
+        },
+        {
+          "zh": "扩大服务覆盖面",
+          "en": "widen access"
+        }
+      ],
+      "target_chunk": "a focus on technology",
+      "reference_answer": "A focus on technology in public services could improve efficiency, reduce costs and widen access.",
+      "review_status": "approved",
+      "feedback_pattern": null
+    },
+    {
+      "card_id": "ab1f7ac2-ba9f-5187-acc4-9ccfdb49cc84",
+      "mode": "structure",
+      "prompt_zh": "此外，没有人能够真正预测哪些行业会在二十年后提供最稳定的工作；届时，雇主也许会开始更看重适应能力，而不是狭窄的技术专长。",
+      "hints": [
+        {
+          "zh": "稳定的工作",
+          "en": "secure jobs"
+        },
+        {
+          "zh": "适应能力",
+          "en": "adaptability"
+        },
+        {
+          "zh": "狭窄的技术专长",
+          "en": "narrow technical expertise"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "Besides, nobody can really predict which industries will create the most secure jobs in twenty years, and it may be that employers begin to value adaptability above narrow technical expertise.",
+      "review_status": "approved",
+      "feedback_pattern": "Besides, nobody can really predict which industries will create the most {content_1} in twenty years, and it may be that employers begin to value {content_2} above {content_3}."
+    },
+    {
+      "card_id": "a5aa0712-c50c-5dc9-9e64-cc7676238df1",
+      "mode": "structure",
+      "prompt_zh": "如果雇主更重视适应能力而不是狭窄的技术专长，他们可能会更青睐具备广泛问题解决能力的劳动者，而不是只接受过单一任务训练的人。",
+      "hints": [
+        {
+          "zh": "适应能力",
+          "en": "adaptability"
+        },
+        {
+          "zh": "狭窄的技术专长",
+          "en": "narrow technical expertise"
+        }
+      ],
+      "target_chunk": null,
+      "reference_answer": "If employers placed greater value on adaptability than on narrow technical expertise, they might prefer workers with broad problem-solving skills to those trained for a single task.",
+      "review_status": "approved",
+      "feedback_pattern": "If employers placed greater value on {content_1} than on {content_2}, they might prefer workers with broad problem-solving skills to those trained for a single task."
+    }
+  ]
+}

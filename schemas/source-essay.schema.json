@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/source-essay.schema.json",
+  "title": "MimicLoop Source Essay",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "ielts_prompt",
+    "full_text",
+    "paragraphs",
+    "source_name",
+    "source_type",
+    "answer_origin",
+    "source_url",
+    "publication_ref",
+    "author",
+    "question_type",
+    "topics",
+    "claimed_band",
+    "examiner_comments",
+    "accessed_at",
+    "local_raw_file",
+    "content_hash",
+    "rights_note",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/schemaVersion"
+    },
+    "id": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "ielts_prompt": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 2000},
+        {"type": "null"}
+      ]
+    },
+    "full_text": {
+      "type": "string",
+      "minLength": 100
+    },
+    "paragraphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["paragraph_index", "text", "content_hash"],
+        "properties": {
+          "paragraph_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content_hash": {
+            "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "source_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "content_role": {
+      "type": "string",
+      "enum": ["ielts_model_essay", "language_richness_corpus"]
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["public_web", "user_provided_html", "user_provided_pdf", "scanned_book", "manual_text"]
+    },
+    "answer_origin": {
+      "type": "string",
+      "enum": [
+        "official_scored_candidate",
+        "official_examiner_model",
+        "teacher_model",
+        "published_language_textbook",
+        "user_authored"
+      ]
+    },
+    "source_url": {
+      "oneOf": [
+        {"type": "string", "format": "uri"},
+        {"type": "null"}
+      ]
+    },
+    "publication_ref": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 500},
+        {"type": "null"}
+      ]
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "question_type": {
+      "oneOf": [
+        {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/questionType"},
+        {"const": "not_applicable"}
+      ]
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/topic"
+      }
+    },
+    "claimed_band": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 50},
+        {"type": "null"}
+      ]
+    },
+    "examiner_comments": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {"type": "null"}
+      ]
+    },
+    "accessed_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    },
+    "local_raw_file": {
+      "type": "string",
+      "pattern": "^sources/raw/.+"
+    },
+    "content_hash": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"
+    },
+    "rights_note": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "created_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    },
+    "updated_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"source_type": {"const": "public_web"}},
+        "required": ["source_type"]
+      },
+      "then": {
+        "properties": {"source_url": {"type": "string", "format": "uri"}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"answer_origin": {"const": "published_language_textbook"}},
+        "required": ["answer_origin"]
+      },
+      "then": {
+        "required": ["content_role"],
+        "properties": {
+          "content_role": {"const": "language_richness_corpus"},
+          "ielts_prompt": {"type": "null"},
+          "question_type": {"const": "not_applicable"},
+          "claimed_band": {"type": "null"},
+          "examiner_comments": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"content_role": {"const": "language_richness_corpus"}},
+        "required": ["content_role"]
+      },
+      "then": {
+        "properties": {
+          "answer_origin": {"const": "published_language_textbook"},
+          "ielts_prompt": {"type": "null"},
+          "question_type": {"const": "not_applicable"}
+        }
+      }
+    }
+  ]
+}

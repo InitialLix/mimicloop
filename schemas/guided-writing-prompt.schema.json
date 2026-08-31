@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/guided-writing-prompt.schema.json",
+  "title": "MimicLoop Learner Imported Guided Writing Prompt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "record_kind", "id", "title", "ielts_prompt", "source_name",
+    "content_role", "source_type", "answer_origin", "author", "question_type", "topics",
+    "content_hash", "analysis_id", "created_at", "updated_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "record_kind": {"const": "guided_writing_prompt"},
+    "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "title": {"type": "string", "minLength": 1, "maxLength": 160},
+    "ielts_prompt": {"type": "string", "minLength": 30, "maxLength": 2000},
+    "source_name": {"const": "Learner imported IELTS Task 2 prompt"},
+    "content_role": {"const": "guided_writing_prompt"},
+    "source_type": {"const": "manual_text"},
+    "answer_origin": {"const": "user_authored"},
+    "author": {"const": "Local learner"},
+    "question_type": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/questionType"},
+    "topics": {
+      "type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true,
+      "items": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/topic"}
+    },
+    "content_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+    "analysis_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+    "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/use-evaluation.schema.json",
+  "title": "MimicLoop Use Evaluation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attempt_id",
+    "verdict",
+    "dimensions",
+    "errors",
+    "positive_evidence",
+    "minimal_hint",
+    "confidence",
+    "needs_review"
+  ],
+  "properties": {
+    "schema_version": {"const": "use-eval.v1"},
+    "attempt_id": {"type": "string", "format": "uuid"},
+    "verdict": {"type": "string", "enum": ["pass", "retry", "incomplete", "cannot_judge"]},
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["meaning", "target_expression", "grammar", "collocation"],
+      "properties": {
+        "meaning": {"type": "string", "enum": ["complete", "partial", "missing", "cannot_judge"]},
+        "target_expression": {"type": "string", "enum": ["natural", "used_with_error", "not_used", "not_required", "cannot_judge"]},
+        "grammar": {"type": "string", "enum": ["ok", "minor_issue", "major_issue", "cannot_judge"]},
+        "collocation": {"type": "string", "enum": ["natural", "awkward", "incorrect", "not_applicable", "cannot_judge"]}
+      }
+    },
+    "errors": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "severity", "span", "message_zh"],
+        "properties": {
+          "type": {"type": "string", "enum": ["meaning", "target_expression", "grammar", "collocation", "word_choice", "typo", "spelling", "other"]},
+          "severity": {"type": "string", "enum": ["non_blocking", "blocking"]},
+          "span": {"type": ["string", "null"], "maxLength": 240},
+          "message_zh": {"type": "string", "minLength": 1, "maxLength": 180}
+        }
+      }
+    },
+    "positive_evidence": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "span", "message_zh"],
+        "properties": {
+          "type": {"type": "string", "enum": ["meaning", "target_expression", "grammar", "collocation"]},
+          "span": {"type": ["string", "null"], "maxLength": 240},
+          "message_zh": {"type": "string", "minLength": 1, "maxLength": 180}
+        }
+      }
+    },
+    "minimal_hint": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "text_zh"],
+          "properties": {
+            "kind": {"type": "string", "enum": ["concept_cue", "verb_cue", "preposition_cue", "partial_form", "retry_instruction"]},
+            "text_zh": {"type": "string", "minLength": 1, "maxLength": 160}
+          }
+        }
+      ]
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "needs_review": {"type": "boolean"}
+  }
+}

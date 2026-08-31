@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.2.0",
+  "id": "77777777-7777-4777-8777-777777777777",
+  "canonical_text": "widen access to",
+  "translation_prompt": "扩大……的可及性",
+  "pattern": "widen access to {service}",
+  "slots": [
+    {
+      "name": "service",
+      "role_zh": "可以被更多人获得的服务或机会",
+      "replacement_examples": ["education", "healthcare", "legal support"]
+    }
+  ],
+  "expression_type": "collocation",
+  "grammar_pattern": "widen access to + 名词",
+  "usage_note": "常用于教育、医疗和公共服务语境，强调覆盖面扩大。",
+  "common_error": null,
+  "accepted_answers": ["widen access to"],
+  "exercise_seed": {},
+  "topics": ["education_children", "technology_ai_digital_media"],
+  "argument_functions": ["describe_result"],
+  "source_links": [
+    {
+      "source_essay_id": "11111111-1111-4111-8111-111111111111",
+      "paragraph_index": 0,
+      "sentence_index": 1,
+      "sentence_text": "While online courses can widen access to education, they cannot fully replace the interaction that takes place in a physical classroom.",
+      "card_id": "33333333-3333-4333-8333-333333333333",
+      "surface_form": "widen access to",
+      "learning_surface_form": "widen access to",
+      "occurrence_index": 0,
+      "learning_occurrence_index": 0,
+      "role": "primary"
+    }
+  ],
+  "selection_scores": {
+    "naturalness": 5,
+    "active_recall_value": 4,
+    "transfer_value": 5,
+    "ielts_usefulness": 5
+  },
+  "difficulty": 3,
+  "normalized_text_hash": "395a0fbc278b74dc792983f8b562ff550b6b73639d810375fe7a6ece4ce78498",
+  "deduplication": {
+    "group_key": "widen access to",
+    "merge_target_id": null,
+    "confidence": "high",
+    "note": null
+  },
+  "recommendation_reasons": [
+    "单词常见但整体搭配需要主动掌握，并可迁移到多种公共服务主题。"
+  ],
+  "uncertainties": [],
+  "workflow_status": "candidate",
+  "learning_mode": "recall_use",
+  "priority": "core",
+  "provenance": {
+    "guideline_version": "1.2.0",
+    "prompt_version": "collocation-full-corpus-extraction-v2",
+    "processor_type": "codex",
+    "model_id": "gpt-5"
+  },
+  "review_history": [
+    {
+      "action": "created",
+      "reviewer": "codex",
+      "reason": "由完整来源范文离线提取，并关联已有正式句子卡，等待人工审核。",
+      "reviewed_at": "2026-08-17T06:00:00.000Z"
+    }
+  ],
+  "content_revision": 1,
+  "created_at": "2026-08-17T06:00:00.000Z",
+  "updated_at": "2026-08-17T06:00:00.000Z"
+}

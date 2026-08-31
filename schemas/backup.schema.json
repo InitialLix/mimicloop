@@ -1,0 +1,701 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/backup.schema.json",
+  "title": "MimicLoop Full Backup",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "backup_id",
+    "app_version",
+    "exported_at",
+    "timezone",
+    "sources",
+    "cards",
+    "candidates",
+    "attempts",
+    "review_states",
+    "settings",
+    "payload_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.4.0", "1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]
+    },
+    "backup_id": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+    },
+    "app_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "exported_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    },
+    "timezone": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "sources": {
+      "type": "array",
+      "items": {"oneOf": [
+        {"$ref": "https://mimicloop.local/schemas/source-essay.schema.json"},
+        {"$ref": "https://mimicloop.local/schemas/guided-writing-prompt.schema.json"}
+      ]}
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/sentence-card.schema.json"
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/candidate-card.schema.json"
+      }
+    },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "card_id",
+          "exercise_type",
+          "prompt_snapshot",
+          "user_answer",
+          "self_rating",
+          "hint_used",
+          "attempt_count",
+          "duration_ms",
+          "completed_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "card_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "exercise_type": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/exerciseType"},
+          "prompt_snapshot": {"type": "string", "minLength": 1},
+          "user_answer": {"type": "string"},
+          "self_rating": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/selfRating"},
+          "hint_used": {"type": "boolean"},
+          "attempt_count": {"type": "integer", "minimum": 1},
+          "duration_ms": {
+            "oneOf": [
+              {"type": "integer", "minimum": 0},
+              {"type": "null"}
+            ]
+          },
+          "completed_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "review_states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["card_id", "learning_stage", "success_streak", "interval_days", "due_at", "last_reviewed_at"],
+        "properties": {
+          "card_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learning_stage": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/learningStage"},
+          "success_streak": {"type": "integer", "minimum": 0},
+          "interval_days": {"type": "number", "minimum": 0},
+          "due_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "last_reviewed_at": {
+            "oneOf": [
+              {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+              {"type": "null"}
+            ]
+          }
+        }
+      }
+    },
+    "collocation_candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/collocation.schema.json"
+      }
+    },
+    "collocations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/collocation.schema.json"
+      }
+    },
+    "collocation_source_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "collocation_id",
+          "source_essay_id",
+          "paragraph_index",
+          "sentence_index",
+          "sentence_text",
+          "card_id",
+          "surface_form",
+          "learning_surface_form",
+          "occurrence_index",
+          "learning_occurrence_index",
+          "start_offset",
+          "end_offset",
+          "role",
+          "created_at"
+        ],
+        "properties": {
+          "collocation_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "source_essay_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "paragraph_index": {"type": "integer", "minimum": 0},
+          "sentence_index": {"type": "integer", "minimum": 0},
+          "sentence_text": {"type": "string", "minLength": 2},
+          "card_id": {
+            "oneOf": [
+              {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+              {"type": "null"}
+            ]
+          },
+          "surface_form": {"type": "string", "minLength": 2},
+          "learning_surface_form": {
+            "oneOf": [{"type": "string", "minLength": 2}, {"type": "null"}]
+          },
+          "occurrence_index": {"type": "integer", "minimum": 0},
+          "learning_occurrence_index": {
+            "oneOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]
+          },
+          "start_offset": {"type": "integer", "minimum": 0},
+          "end_offset": {"type": "integer", "minimum": 0},
+          "role": {"type": "string", "enum": ["primary", "supporting"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "collocation_attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "collocation_id", "exercise_type", "prompt_snapshot", "user_answer",
+          "normalized_answer", "match_result", "self_rating", "hint_used", "attempt_count",
+          "duration_ms", "completed_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "collocation_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "exercise_type": {"type": "string", "minLength": 1},
+          "prompt_snapshot": {"type": "string", "minLength": 1},
+          "user_answer": {"type": "string"},
+          "normalized_answer": {"type": "string"},
+          "match_result": {"type": "string", "minLength": 1},
+          "self_rating": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/selfRating"},
+          "hint_used": {"type": "boolean"},
+          "attempt_count": {"type": "integer", "minimum": 1},
+          "duration_ms": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+          "completed_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "collocation_progress": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "collocation_id", "learning_stage", "recall_score", "application_score",
+          "success_streak", "lapse_count", "interval_days", "due_at", "last_reviewed_at"
+        ],
+        "properties": {
+          "collocation_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learning_stage": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/learningStage"},
+          "recall_score": {"oneOf": [{"type": "number"}, {"type": "null"}]},
+          "application_score": {"oneOf": [{"type": "number"}, {"type": "null"}]},
+          "success_streak": {"type": "integer", "minimum": 0},
+          "lapse_count": {"type": "integer", "minimum": 0},
+          "interval_days": {"type": "number", "minimum": 0},
+          "due_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "last_reviewed_at": {
+            "oneOf": [
+              {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+              {"type": "null"}
+            ]
+          }
+        }
+      }
+    },
+    "agent_traces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "learner_id_hash", "feature", "status", "started_at", "completed_at",
+          "steps_json", "provider", "model", "prompt_version", "schema_version",
+          "input_tokens", "output_tokens", "error_codes_json", "created_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learner_id_hash": {"type": "string", "minLength": 1},
+          "feature": {"enum": ["use_evaluator", "adaptive_training", "guided_writing_coach", "guided_writing_paragraph", "guided_writing_node_language", "guided_writing_introduction", "guided_writing_conclusion", "guided_writing_full_essay", "guided_writing_task2_prompt_analysis"]},
+          "status": {"type": "string", "enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "started_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "steps_json": {"type": "string"},
+          "provider": {"type": ["string", "null"]},
+          "model": {"type": ["string", "null"]},
+          "prompt_version": {"type": "string", "minLength": 1},
+          "schema_version": {"enum": ["use-eval.v1", "adaptive-decision.v1", "guided-writing-coach.v1", "guided-writing-coach.v1.1", "guided-writing-coach.v1.2", "guided-writing-paragraph-evaluation.v1", "guided-writing-node-language-evaluation.v1", "guided-writing-introduction-evaluation.v1", "guided-writing-conclusion-evaluation.v1", "guided-writing-full-essay-evaluation.v1", "guided-writing-task2-prompt-analysis.v1"]},
+          "input_tokens": {"type": ["integer", "null"], "minimum": 0},
+          "output_tokens": {"type": ["integer", "null"], "minimum": 0},
+          "error_codes_json": {"type": "string"},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "use_evaluation_runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "attempt_id", "exercise_ref", "exercise_kind", "asset_id", "asset_revision",
+          "input_hash", "learner_answer", "status", "evaluation_json", "feedback_json",
+          "trace_id", "error_code", "created_at", "completed_at", "updated_at"
+        ],
+        "properties": {
+          "attempt_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "exercise_ref": {"type": "string", "minLength": 1},
+          "exercise_kind": {"enum": ["collocation_use", "sentence_use"]},
+          "asset_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "asset_revision": {"type": "integer", "minimum": 1},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "learner_answer": {"type": "string"},
+          "previous_attempt_id": {
+            "oneOf": [
+              {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+              {"type": "null"}
+            ]
+          },
+          "retry_index": {"type": "integer", "minimum": 0, "maximum": 2},
+          "status": {"type": "string", "enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]},
+          "feedback_json": {"type": ["string", "null"]},
+          "teaching_action_json": {"type": ["string", "null"]},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "learning_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "learner_id", "asset_id", "asset_type", "dimension", "outcome",
+          "context_json", "evaluator_json", "source_kind", "source_id",
+          "evidence_version", "occurred_at", "created_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "learner_id": {"const": "local-default"},
+          "asset_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "asset_type": {"enum": ["collocation", "sentence_pattern", "fixed_phrase"]},
+          "dimension": {"enum": ["recall", "guided_use", "transfer_use", "spontaneous_use", "delayed_retention"]},
+          "outcome": {"enum": ["success", "partial", "failure", "not_judged"]},
+          "context_json": {"type": "string", "minLength": 2},
+          "evaluator_json": {"type": "string", "minLength": 2},
+          "source_kind": {"enum": ["sentence_attempt", "collocation_attempt"]},
+          "source_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "evidence_version": {"const": "learning-evidence.v1"},
+          "occurred_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "adaptive_training_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "learner_id", "trigger_kind", "trigger_id", "asset_id", "asset_type",
+          "policy_version", "action_json", "reason_codes_json", "input_evidence_ids_json",
+          "candidate_actions_json", "guard_results_json", "trace_id", "created_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "learner_id": {"const": "local-default"},
+          "trigger_kind": {"enum": ["sentence_attempt", "collocation_attempt"]},
+          "trigger_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "asset_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "asset_type": {"enum": ["collocation", "sentence_pattern", "fixed_phrase"]},
+          "policy_version": {"const": "adaptive-policy.v1"},
+          "action_json": {"type": "string", "minLength": 2},
+          "reason_codes_json": {"type": "string", "minLength": 2},
+          "input_evidence_ids_json": {"type": "string", "minLength": 2},
+          "candidate_actions_json": {"type": "string", "minLength": 2},
+          "guard_results_json": {"type": "string", "minLength": 2},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "adaptive_retests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "learner_id", "asset_id", "asset_type", "source_decision_id",
+          "purpose", "due_at", "status", "created_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "learner_id": {"const": "local-default"},
+          "asset_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "asset_type": {"enum": ["collocation", "sentence_pattern", "fixed_phrase"]},
+          "source_decision_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "purpose": {"enum": ["quick_confirmation", "lower_scaffold", "retention"]},
+          "due_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "status": {"enum": ["scheduled", "completed", "cancelled"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "learner_id", "source_essay_id", "paragraph_key", "task_analysis_version",
+          "prompt_snapshot", "question_type", "status", "current_node", "argument_graph_json",
+          "created_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learner_id": {"const": "local-default-learner"},
+          "source_essay_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "paragraph_key": {"enum": ["body_1", "body_2"]},
+          "task_analysis_version": {"const": "essay-task-analysis.v1"},
+          "prompt_snapshot": {"type": "string", "minLength": 1},
+          "question_type": {"enum": ["opinion", "discussion", "advantages_disadvantages", "causes_solutions", "positive_negative_development", "two_part_multi_part"]},
+          "status": {"enum": ["building_argument", "ready_to_draft"]},
+          "current_node": {"oneOf": [{"enum": ["stance", "claim", "reason", "mechanism", "result"]}, {"type": "null"}]},
+          "argument_graph_json": {"type": "string", "minLength": 2},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_turns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "session_id", "node", "question_en", "learner_answer", "origin",
+          "input_hash", "status", "evaluation_json", "action_json", "trace_id", "error_code",
+          "created_at", "completed_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "session_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "node": {"enum": ["stance", "claim", "reason", "mechanism", "result"]},
+          "question_en": {"type": "string", "minLength": 1},
+          "learner_answer": {"type": "string", "minLength": 1, "maxLength": 1200},
+          "origin": {"enum": ["user_independent", "user_after_question", "user_after_hint", "user_selected_from_options", "agent_supplied"]},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]},
+          "action_json": {"type": ["string", "null"]},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_paragraph_drafts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "session_id", "paragraph_key", "draft_text", "input_hash", "status",
+          "evaluation_json", "trace_id", "error_code", "created_at", "completed_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "session_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "paragraph_key": {"enum": ["body_1", "body_2"]},
+          "draft_text": {"type": "string", "minLength": 1, "maxLength": 5000},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_node_language_attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "session_id", "node", "learner_text", "asset_type", "asset_id",
+          "hint_level", "input_hash", "status", "evaluation_json", "trace_id", "error_code",
+          "created_at", "completed_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "session_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "node": {"enum": ["claim", "reason", "mechanism", "result"]},
+          "learner_text": {"type": "string", "minLength": 1, "maxLength": 1200},
+          "asset_type": {"oneOf": [{"enum": ["sentence", "collocation"]}, {"type": "null"}]},
+          "asset_id": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"}, {"type": "null"}]},
+          "hint_level": {"type": "integer", "minimum": 0, "maximum": 4},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_introduction_drafts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "learner_id", "source_essay_id", "body_1_session_id", "body_2_session_id",
+          "opening_text", "task_framing_text", "thesis_text", "draft_text", "input_hash",
+          "status", "evaluation_json", "trace_id", "error_code", "created_at", "completed_at", "updated_at"
+        ],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learner_id": {"type": "string", "minLength": 1},
+          "source_essay_id": {"type": "string", "minLength": 1},
+          "body_1_session_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "body_2_session_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "opening_text": {"type": "string", "maxLength": 1500},
+          "task_framing_text": {"type": "string", "minLength": 1, "maxLength": 1500},
+          "thesis_text": {"type": "string", "minLength": 1, "maxLength": 1500},
+          "draft_text": {"type": "string", "minLength": 1, "maxLength": 4000},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_conclusion_drafts": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "learner_id", "source_essay_id", "introduction_draft_id", "body_1_draft_id", "body_2_draft_id", "conclusion_text", "input_hash", "status", "evaluation_json", "trace_id", "error_code", "created_at", "completed_at", "updated_at"],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learner_id": {"type": "string", "minLength": 1}, "source_essay_id": {"type": "string", "minLength": 1},
+          "introduction_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "body_1_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "body_2_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "conclusion_text": {"type": "string", "minLength": 1, "maxLength": 3000},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]}, "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]}, "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_full_essay_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "learner_id", "source_essay_id", "introduction_draft_id", "body_1_draft_id", "body_2_draft_id", "conclusion_draft_id", "input_hash", "status", "evaluation_json", "trace_id", "error_code", "created_at", "completed_at", "updated_at"],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learner_id": {"type": "string", "minLength": 1}, "source_essay_id": {"type": "string", "minLength": 1},
+          "introduction_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "body_1_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "body_2_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "conclusion_draft_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "input_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "evaluation_json": {"type": ["string", "null"]}, "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]}, "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "guided_writing_prompt_analyses": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "learner_id", "prompt_text", "prompt_hash", "status", "analysis_json", "trace_id", "error_code", "created_at", "completed_at", "updated_at"],
+        "properties": {
+          "id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "learner_id": {"type": "string", "minLength": 1},
+          "prompt_text": {"type": "string", "minLength": 30, "maxLength": 2000},
+          "prompt_hash": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"},
+          "status": {"enum": ["pending", "success", "fallback", "invalid_output", "timeout", "error"]},
+          "analysis_json": {"type": ["string", "null"]},
+          "trace_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+          "error_code": {"type": ["string", "null"]},
+          "created_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+          "completed_at": {"oneOf": [{"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}, {"type": "null"}]},
+          "updated_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["daily_new_card_limit"],
+      "properties": {
+        "daily_new_card_limit": {"type": "integer", "minimum": 0, "maximum": 100},
+        "adaptive_use_started_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+        "collocation_use_started_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"},
+        "learner_model_evidence_started_at": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"}
+      }
+    },
+    "payload_hash": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.1.0", "1.2.0", "1.3.0", "1.4.0", "1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {
+          "collocation_candidates": {},
+          "collocations": {},
+          "collocation_source_links": {},
+          "collocation_attempts": {},
+          "collocation_progress": {}
+        },
+        "required": [
+          "collocation_candidates",
+          "collocations",
+          "collocation_source_links",
+          "collocation_attempts",
+          "collocation_progress"
+        ]
+      }
+    }
+    ,
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.2.0", "1.3.0", "1.4.0", "1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {
+          "agent_traces": {},
+          "use_evaluation_runs": {}
+        },
+        "required": ["agent_traces", "use_evaluation_runs"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.4.0", "1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {"learning_evidence": {}},
+        "required": ["learning_evidence"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {"adaptive_training_decisions": {}, "adaptive_retests": {}},
+        "required": ["adaptive_training_decisions", "adaptive_retests"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {"guided_writing_sessions": {}, "guided_writing_turns": {}},
+        "required": ["guided_writing_sessions", "guided_writing_turns"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.7.0", "1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {"guided_writing_paragraph_drafts": {}},
+        "required": ["guided_writing_paragraph_drafts"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.8.0", "1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {"guided_writing_node_language_attempts": {}},
+        "required": ["guided_writing_node_language_attempts"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"schema_version": {"enum": ["1.9.0", "1.10.0", "1.11.0"]}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {"guided_writing_introduction_drafts": {}},
+        "required": ["guided_writing_introduction_drafts"]
+      }
+    },
+    {
+      "if": {"properties": {"schema_version": {"enum": ["1.10.0", "1.11.0"]}}, "required": ["schema_version"]},
+      "then": {
+        "properties": {"guided_writing_conclusion_drafts": {}, "guided_writing_full_essay_reviews": {}},
+        "required": ["guided_writing_conclusion_drafts", "guided_writing_full_essay_reviews"]
+      }
+    },
+    {
+      "if": {"properties": {"schema_version": {"const": "1.11.0"}}, "required": ["schema_version"]},
+      "then": {"properties": {"guided_writing_prompt_analyses": {}}, "required": ["guided_writing_prompt_analyses"]}
+    }
+  ]
+}

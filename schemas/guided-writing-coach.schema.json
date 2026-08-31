@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/guided-writing-coach.schema.json",
+  "title": "MimicLoop Guided Writing Coach Evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "turn_id", "verdict", "dimensions", "issue_type",
+    "development_relation", "accepted_span", "forward_span",
+    "feedback_en", "confidence", "needs_review"
+  ],
+  "properties": {
+    "schema_version": {"const": "guided-writing-coach.v1.2"},
+    "turn_id": {"$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"},
+    "verdict": {"enum": ["accept", "retry", "cannot_judge"]},
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relevance", "logic", "specificity"],
+      "properties": {
+        "relevance": {"enum": ["direct", "partial", "off_task", "cannot_judge"]},
+        "logic": {"enum": ["clear", "incomplete", "contradictory", "cannot_judge"]},
+        "specificity": {"enum": ["sufficient", "vague", "cannot_judge"]}
+      }
+    },
+    "issue_type": {
+      "oneOf": [
+        {"enum": ["off_task", "vague", "missing_logic", "contradiction", "language_unclear"]},
+        {"type": "null"}
+      ]
+    },
+    "development_relation": {
+      "oneOf": [
+        {"enum": ["causal", "principle_application", "comparison", "problem_response", "qualification", "unclear"]},
+        {"type": "null"}
+      ]
+    },
+    "accepted_span": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 1200},
+        {"type": "null"}
+      ]
+    },
+    "forward_span": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["target_node", "text"],
+          "properties": {
+            "target_node": {"enum": ["claim", "reason", "mechanism", "result"]},
+            "text": {"type": "string", "minLength": 1, "maxLength": 1200}
+          }
+        },
+        {"type": "null"}
+      ]
+    },
+    "feedback_en": {"type": "string", "minLength": 1, "maxLength": 240},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "needs_review": {"type": "boolean"}
+  }
+}

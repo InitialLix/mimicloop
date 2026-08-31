@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimicloop.local/schemas/sentence-card.schema.json",
+  "title": "MimicLoop Sentence Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "source_essay_id",
+    "original_sentence",
+    "learning_sentence",
+    "learning_edits",
+    "translation_zh",
+    "context_before",
+    "context_after",
+    "paragraph_index",
+    "sentence_index",
+    "task",
+    "question_types",
+    "topics",
+    "argument_functions",
+    "primary_focus",
+    "chunks",
+    "glosses",
+    "pattern",
+    "slots",
+    "grammar_note",
+    "usage_note",
+    "simplified_version",
+    "transfer_example",
+    "exercise_seed",
+    "difficulty",
+    "transfer_value",
+    "source_reliability",
+    "content_status",
+    "content_revision",
+    "normalized_text_hash",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["1.0.0", "1.1.0"]},
+    "id": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+    },
+    "source_essay_id": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/uuid"
+    },
+    "original_sentence": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "learning_sentence": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "learning_edits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["edit_type", "before", "after", "reason"],
+        "properties": {
+          "edit_type": {
+            "type": "string",
+            "enum": ["formatting_cleanup", "expand_abbreviation", "resolve_reference"]
+          },
+          "before": {"type": "string"},
+          "after": {"type": "string"},
+          "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "translation_zh": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "context_before": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "context_after": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "paragraph_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sentence_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "task": {
+      "type": "string",
+      "const": "academic_task_2"
+    },
+    "question_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/questionType"
+      }
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/topic"
+      }
+    },
+    "argument_functions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/argumentFunction"
+      }
+    },
+    "primary_focus": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/primaryFocus"
+    },
+    "chunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "meaning_zh", "note"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1, "maxLength": 200},
+          "meaning_zh": {"type": "string", "minLength": 1, "maxLength": 300},
+          "note": {"type": "string", "maxLength": 500}
+        }
+      }
+    },
+    "glosses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "lemma", "part_of_speech", "meaning_zh", "note", "occurrence_index"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1, "maxLength": 100},
+          "lemma": {"type": "string", "minLength": 1, "maxLength": 100},
+          "part_of_speech": {
+            "type": "string",
+            "enum": [
+              "noun",
+              "verb",
+              "adjective",
+              "adverb",
+              "preposition",
+              "conjunction",
+              "pronoun",
+              "determiner",
+              "phrase",
+              "other"
+            ]
+          },
+          "meaning_zh": {"type": "string", "minLength": 1, "maxLength": 120},
+          "note": {"type": "string", "maxLength": 240},
+          "occurrence_index": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "pattern": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 2000},
+        {"type": "null"}
+      ]
+    },
+    "slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "role_zh", "original_value", "replacement_examples"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "role_zh": {"type": "string", "minLength": 1, "maxLength": 300},
+          "original_value": {"type": "string", "minLength": 1, "maxLength": 500},
+          "replacement_examples": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1, "maxLength": 500}
+          }
+        }
+      }
+    },
+    "grammar_note": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 500},
+        {"type": "null"}
+      ]
+    },
+    "usage_note": {
+      "oneOf": [
+        {"type": "string", "minLength": 1, "maxLength": 500},
+        {"type": "null"}
+      ]
+    },
+    "simplified_version": {
+      "oneOf": [
+        {"type": "string", "minLength": 10, "maxLength": 2000},
+        {"type": "null"}
+      ]
+    },
+    "transfer_example": {
+      "oneOf": [
+        {"type": "string", "minLength": 10, "maxLength": 2000},
+        {"type": "null"}
+      ]
+    },
+    "exercise_seed": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "chunk_cloze": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["chunk_text", "prompt_sentence", "reference_answer"],
+            "properties": {
+              "chunk_text": {"type": "string", "minLength": 1, "maxLength": 200},
+              "prompt_sentence": {"type": "string", "minLength": 10, "maxLength": 2000},
+              "reference_answer": {"type": "string", "minLength": 1, "maxLength": 200}
+            }
+          }
+        },
+        "translation_recall": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt_zh", "reference_answer"],
+          "properties": {
+            "prompt_zh": {"type": "string", "minLength": 1, "maxLength": 1000},
+            "reference_answer": {"type": "string", "minLength": 10, "maxLength": 2000}
+          }
+        },
+        "slot_replacement": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["prompt_zh", "slot_values", "reference_answer"],
+            "properties": {
+              "prompt_zh": {"type": "string", "minLength": 1, "maxLength": 1000},
+              "hints": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["zh", "en"],
+                  "properties": {
+                    "zh": {"type": "string", "minLength": 1, "maxLength": 100},
+                    "en": {"type": "string", "minLength": 1, "maxLength": 200}
+                  }
+                }
+              },
+              "feedback_pattern": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 2000,
+                "pattern": "\\{[a-z][a-z0-9_]*\\}"
+              },
+              "slot_values": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["slot_name", "value"],
+                  "properties": {
+                    "slot_name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+                    "value": {"type": "string", "minLength": 1, "maxLength": 500}
+                  }
+                }
+              },
+              "reference_answer": {"type": "string", "minLength": 10, "maxLength": 2000}
+            }
+          }
+        },
+        "guided_application": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt_zh", "hints", "target_chunk", "reference_answer"],
+          "properties": {
+            "prompt_zh": {"type": "string", "minLength": 1, "maxLength": 1000},
+            "hints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["zh", "en"],
+                "properties": {
+                  "zh": {"type": "string", "minLength": 1, "maxLength": 100},
+                  "en": {"type": "string", "minLength": 1, "maxLength": 200}
+                }
+              }
+            },
+            "target_chunk": {"type": "string", "minLength": 1, "maxLength": 200},
+            "reference_answer": {"type": "string", "minLength": 10, "maxLength": 2000}
+          }
+        }
+      }
+    },
+    "difficulty": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "transfer_value": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "source_reliability": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sourceReliability"
+    },
+    "content_status": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/contentStatus"
+    },
+    "content_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "normalized_text_hash": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    },
+    "updated_at": {
+      "$ref": "https://mimicloop.local/schemas/common.schema.json#/$defs/dateTime"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"primary_focus": {"const": "vocabulary"}},
+        "required": ["primary_focus"]
+      },
+      "then": {
+        "properties": {
+          "chunks": {"type": "array", "minItems": 1},
+          "exercise_seed": {
+            "type": "object",
+            "required": ["chunk_cloze"],
+            "properties": {"chunk_cloze": true}
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"primary_focus": {"enum": ["structure", "mixed"]}},
+        "required": ["primary_focus"]
+      },
+      "then": {
+        "properties": {
+          "pattern": {"type": "string", "minLength": 1},
+          "slots": {"type": "array", "minItems": 1},
+          "exercise_seed": {
+            "type": "object",
+            "required": ["slot_replacement"],
+            "properties": {"slot_replacement": true}
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"primary_focus": {"const": "mixed"}},
+        "required": ["primary_focus"]
+      },
+      "then": {
+        "properties": {
+          "chunks": {"type": "array", "minItems": 1},
+          "exercise_seed": {
+            "type": "object",
+            "required": ["chunk_cloze", "slot_replacement"],
+            "properties": {
+              "chunk_cloze": true,
+              "slot_replacement": true
+            }
+          }
+        }
+      }
+    }
+  ]
+}

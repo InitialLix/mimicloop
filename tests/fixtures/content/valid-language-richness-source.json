@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "id": "77777777-7777-4777-8777-777777777777",
+  "title": "Synthetic language-richness fixture",
+  "ielts_prompt": null,
+  "full_text": "This synthetic lesson describes how careful observers notice patterns in ordinary life. It exists only to verify that a published language source is kept separate from an IELTS model essay.\n\nA second paragraph provides enough structure for paragraph-level selection and source-location tests without reproducing any textbook content.",
+  "paragraphs": [
+    {
+      "paragraph_index": 0,
+      "text": "This synthetic lesson describes how careful observers notice patterns in ordinary life. It exists only to verify that a published language source is kept separate from an IELTS model essay.",
+      "content_hash": "8882d728d9d96831d2d8c94f1c703863607cdfb632f2afff11fbf019d5dcb313"
+    },
+    {
+      "paragraph_index": 1,
+      "text": "A second paragraph provides enough structure for paragraph-level selection and source-location tests without reproducing any textbook content.",
+      "content_hash": "28075cb818774b110d40b74ae403d516b704cf73cf404ed5e53075b34d5ce6f9"
+    }
+  ],
+  "source_name": "New Concept English 3",
+  "content_role": "language_richness_corpus",
+  "source_type": "manual_text",
+  "answer_origin": "published_language_textbook",
+  "source_url": "https://example.com/synthetic-language-source",
+  "publication_ref": "Synthetic lesson fixture",
+  "author": "Synthetic fixture author",
+  "question_type": "not_applicable",
+  "topics": ["culture_art_language_media"],
+  "claimed_band": null,
+  "examiner_comments": null,
+  "accessed_at": "2026-08-18T06:00:00Z",
+  "local_raw_file": "sources/raw/test-language-richness-fixture.txt",
+  "content_hash": "59ab2309abe6f1fff507c4a91264cdb011fe68175f8b81e1d7cc936a12e6c875",
+  "rights_note": "Synthetic content used only to test language-richness source separation.",
+  "created_at": "2026-08-18T06:00:00Z",
+  "updated_at": "2026-08-18T06:00:00Z"
+}

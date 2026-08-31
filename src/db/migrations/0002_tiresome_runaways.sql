@@ -1,0 +1,1 @@
+CREATE INDEX `attempts_completed_idx` ON `attempts` (`completed_at`);
